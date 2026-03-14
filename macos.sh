@@ -1,12 +1,9 @@
 #!/bin/bash
 
-steamcmd_dir="$HOME/steamcmd"
+steamcmd_dir="$HOME/Steam"
 install_dir="$HOME/dontstarvetogether_dedicated_server"
 cluster_name="MyDediServer"
 dontstarve_dir="$HOME/Documents/Klei/DoNotStarveTogether"
-
-# cluster_mods="$dontstarve_dir/$cluster_name/mods"
-# server_mods="$install_dir/dontstarve_dedicated_server_nullrenderer.app/Contents/Resources/mods"
 
 function fail()
 {
@@ -29,17 +26,7 @@ check_for_file "$dontstarve_dir/$cluster_name/cluster_token.txt"
 check_for_file "$dontstarve_dir/$cluster_name/Master/server.ini"
 check_for_file "$dontstarve_dir/$cluster_name/Caves/server.ini"
 
-# ./steamcmd.sh +force_install_dir "$install_dir" +login anonymous +app_update 343050 validate +quit
-./steamcmd.sh +force_install_dir "$install_dir" +login anonymous +quit
-
-# if [ -d "$cluster_mods" ]; then
-# 	echo "Copying mods from cluster to server directory..."
-# 	# mkdir -p "$server_mods" || fail "Cannot create server mods directory"
-# 	cp -R "$cluster_mods/." "$server_mods/" || fail "Failed to copy mods"
-# else
-# 	echo "Error: cluster mods directory not found: $cluster_mods" >&2
-# 	exit 1
-# fi
+./steamcmd.sh +force_install_dir "$install_dir" +login anonymous +app_update 343050 validate +quit
 
 check_for_file "$install_dir/dontstarve_dedicated_server_nullrenderer.app/Contents/MacOS/"
 

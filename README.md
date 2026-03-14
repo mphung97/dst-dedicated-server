@@ -10,18 +10,6 @@ A Don't Starve Together (DST) dedicated server setup for macOS and Linux with du
 - **Mod Support**: Easy mod management and configuration
 - **Player Management**: Admin list, whitelist, and blocklist support
 
-## Quick Start
-
-### macOS
-```bash
-./macos.sh
-```
-
-### Linux
-```bash
-bash linux.sh
-```
-
 ## Configuration
 
 ### Main Settings
@@ -44,19 +32,43 @@ Edit `cluster.ini`:
 
 Add mods to the `mods/` folder. Mods are configured in:
 - `mods/modsettings.lua`: Global mod settings
+- `mods/dedicated_server_mods_setup.lua`: Dedicated server mod configuration
 - World-specific overrides in `Master/modoverrides.lua` and `Caves/modoverrides.lua`
 
-See `mods/INSTALLING_MODS.txt` for detailed instructions.
+### macOS Dedicated Server
+
+To install mods on the macOS dedicated server, copy the mods folder to the dedicated server installation:
+
+```bash
+cp -r ~/dev/MyDediServer/mods ~/dontstarvetogether_dedicated_server/dontstarve_dedicated_server_nullrenderer.app/Contents/Resources/mods
+```
+
 
 ## Directory Structure
 
 ```
-├── cluster.ini              # Main server configuration
-├── Master/                  # Master world files
-├── Caves/                   # Caves world files
-├── mods/                    # Mod configuration
-├── adminlist.txt            # Server admins
-└── startup scripts          # Platform-specific launchers
+├── linux.sh                 # Linux startup script
+├── macos.sh                 # macOS startup script
+├── README.md                # This file
+├── game/                    # Game configuration and world data
+│   ├── cluster.ini          # Main server configuration
+│   ├── cluster_token.txt    # Cluster authentication token
+│   ├── adminlist.txt        # Server administrators
+│   ├── whitelist.txt        # Whitelisted players (optional)
+│   ├── blocklist.txt        # Banned players
+│   ├── Master/              # Master world files
+│   │   ├── server.ini       # Master shard configuration
+│   │   ├── modoverrides.lua # Master-specific mod overrides
+│   │   └── worldgenoverride.lua # Master world generation settings
+│   └── Caves/               # Caves world files
+│       ├── server.ini       # Caves shard configuration
+│       ├── modoverrides.lua # Caves-specific mod overrides
+│       └── worldgenoverride.lua # Caves world generation settings
+└── mods/                    # Mod configuration and setup
+    ├── modsettings.lua      # Global mod settings
+    ├── dedicated_server_mods_setup.lua # Mod setup script
+    ├── INSTALLING_MODS.txt  # Mod installation guide
+    └── MAKING_MODS.txt      # Mod creation guide
 ```
 
 ## Requirements
