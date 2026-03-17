@@ -1,0 +1,113 @@
+version: '3.8'
+
+services:
+  master:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dst-master
+    hostname: dst-master
+    ports:
+      - "${MASTER_PORT:-10999}:10999/udp"
+      - "${MASTER_TCP_PORT:-8765}:8765/tcp"
+    environment:
+      - CLUSTER_NAME=${CLUSTER_NAME:-DSTCluster}
+      - GAME_SERVER_NAME=${GAME_SERVER_NAME:-World of PopPop}
+      - GAME_SERVER_DESC=${GAME_SERVER_DESC:-A DST dedicated server}
+      - GAME_MODE=${GAME_MODE:-survival}
+      - PVP_ENABLED=${PVP_ENABLED:-false}
+      - MASTER_SHARD=Master
+      - RUN_CAVES=false
+      - CLUSTER_TOKEN=${CLUSTER_TOKEN:?Error: CLUSTER_TOKEN not set}
+      - ADMIN_LIST=${ADMIN_LIST:-}
+      - WHITELIST_LIST=${WHITELIST_LIST:-}
+      - BLOCKLIST=${BLOCKLIST:-}
+      - GAME_DIR=/app/game
+      - CONFIG_DIR=/app/config
+      - INSTALL_DIR=/app/server
+      - MODS_DIR=/app/mods
+    volumes:
+      - dst-config:/app/config
+      - dst-mods:/app/mods
+      - dst-master-data:/app/game/Master
+      - ${LOCAL_GAME_DIR:-.}/game/Master:/app/game.mount/Master:ro
+      - ${LOCAL_GAME_DIR:-.}/game/cluster.ini:/app/game.mount/cluster.ini:ro
+      - ${LOCAL_GAME_DIR:-.}/game/cluster_token.txt:/app/game.mount/cluster_token.txt:ro
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "dontstarve_dedicated_server"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: on-failure:3
+    networks:
+      - dst-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+
+  caves:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dst-caves
+    hostname: dst-caves
+    depends_on:
+      master:
+        condition: service_healthy
+    ports:
+      - "${CAVES_PORT:-11000}:10999/udp"
+      - "${CAVES_TCP_PORT:-8766}:8765/tcp"
+    environment:
+      - CLUSTER_NAME=${CLUSTER_NAME:-DSTCluster}
+      - GAME_SERVER_NAME=${GAME_SERVER_NAME:-World of PopPop}
+      - GAME_SERVER_DESC=${GAME_SERVER_DESC:-A DST dedicated server}
+      - GAME_MODE=${GAME_MODE:-survival}
+      - PVP_ENABLED=${PVP_ENABLED:-false}
+      - MASTER_SHARD=Caves
+      - RUN_CAVES=false
+      - CLUSTER_TOKEN=${CLUSTER_TOKEN:?Error: CLUSTER_TOKEN not set}
+      - ADMIN_LIST=${ADMIN_LIST:-}
+      - WHITELIST_LIST=${WHITELIST_LIST:-}
+      - BLOCKLIST=${BLOCKLIST:-}
+      - GAME_DIR=/app/game
+      - CONFIG_DIR=/app/config
+      - INSTALL_DIR=/app/server
+      - MODS_DIR=/app/mods
+    volumes:
+      - dst-config:/app/config
+      - dst-mods:/app/mods
+      - dst-caves-data:/app/game/Caves
+      - ${LOCAL_GAME_DIR:-.}/game/Caves:/app/game.mount/Caves:ro
+      - ${LOCAL_GAME_DIR:-.}/game/cluster.ini:/app/game.mount/cluster.ini:ro
+      - ${LOCAL_GAME_DIR:-.}/game/cluster_token.txt:/app/game.mount/cluster_token.txt:ro
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "dontstarve_dedicated_server"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: on-failure:3
+    networks:
+      - dst-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+
+volumes:
+  dst-config:
+    driver: local
+  dst-mods:
+    driver: local
+  dst-master-data:
+    driver: local
+  dst-caves-data:
+    driver: local
+
+networks:
+  dst-network:
+    driver: bridge

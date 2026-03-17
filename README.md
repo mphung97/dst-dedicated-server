@@ -6,9 +6,46 @@ A Don't Starve Together (DST) dedicated server setup for macOS and Linux with du
 
 - **Dual Shard**: Master world + Caves dimension
 - **Multiplayer**: Up to 6 players (non-PvP, survival mode)
-- **Cross-Platform**: macOS and Linux startup scripts
+- **Cross-Platform**: macOS and Linux startup scripts, or Docker containers
 - **Mod Support**: Easy mod management and configuration
 - **Player Management**: Admin list, whitelist, and blocklist support
+
+## Deployment Options
+
+### Option 1: Docker (Recommended for Production)
+
+For reliable, reproducible deployments with Docker:
+
+```bash
+# Setup environment
+cp .env.example .env
+# Edit .env and add your CLUSTER_TOKEN
+
+# Start servers
+docker-compose up -d
+```
+
+**Benefits:**
+- Consistent across all environments
+- Easy scaling and multi-world deployment
+- Simplified configuration via environment variables
+- Built-in health checks and automatic restart
+
+[→ Full Docker Guide](DOCKER_GUIDE.md)
+
+### Option 2: Shell Scripts (Traditional)
+
+For local development or traditional VM deployments:
+
+```bash
+# macOS
+./macos.sh
+
+# Linux
+./linux.sh
+```
+
+**Note:** Requires manual SteamCMD and dependency setup.
 
 ## Configuration
 

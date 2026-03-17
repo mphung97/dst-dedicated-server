@@ -2,7 +2,7 @@
 
 steamcmd_dir="$HOME/steamcmd"
 install_dir="$HOME/dontstarvetogether_dedicated_server"
-cluster_name="MyDediServer"
+cluster_name="DSTCluster"
 dontstarve_dir="$HOME/.klei/DoNotStarveTogether"
 
 function fail()
@@ -26,8 +26,7 @@ check_for_file "$dontstarve_dir/$cluster_name/cluster_token.txt"
 check_for_file "$dontstarve_dir/$cluster_name/Master/server.ini"
 check_for_file "$dontstarve_dir/$cluster_name/Caves/server.ini"
 
-# ./steamcmd.sh +force_install_dir "$install_dir" +login anonymous +app_update 343050 validate +quit
-./steamcmd.sh +force_install_dir "$install_dir" +login anonymous +quit
+./steamcmd.sh +force_install_dir "$install_dir" +login anonymous +app_update 343050 validate +quit
 
 check_for_file "$install_dir/bin64"
 
