@@ -1,7 +1,0 @@
-# Docker configuration exclusions
-docker/
-Dockerfile
-.dockerignore
-docker-compose.yml
-.env.example
-DOCKER_GUIDE.md
