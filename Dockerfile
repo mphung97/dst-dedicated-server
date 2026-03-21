@@ -16,14 +16,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends libcurl4-gnutls
 USER steam
 
 RUN "$STEAM_HOME/steamcmd.sh" \
-    +@sSteamCmdForcePlatformType linux \
+    +@ShutdownOnFailedCommand 1 \
+    +@NoPromptForPassword 1 \
     +force_install_dir "$INSTALL_DIR" \
     +login anonymous \
     +app_update 343050 validate \
     +quit
 
 COPY --chown=steam:steam Cluster_1 "$DONTSTARVE_DIR/Cluster_1"
-COPY --chown=steam:steam mods "$INSTALL_DIR/mods"
 COPY --chown=steam:steam run_dedicated_servers.sh /home/steam/run_dedicated_servers.sh
 
 RUN chmod +x /home/steam/run_dedicated_servers.sh
