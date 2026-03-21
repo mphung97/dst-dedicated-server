@@ -14,6 +14,7 @@ A containerized Don't Starve Together (DST) dedicated server setup with multi-sh
 
 ```
 dst-dedicated-server/
+├── docker-compose.yml             # Docker Compose configuration
 ├── Dockerfile                    # Docker container definition
 ├── run_dedicated_servers.sh       # Main server startup script
 ├── .gitignore                     # Git ignore rules
