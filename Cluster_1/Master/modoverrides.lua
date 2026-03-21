@@ -68,7 +68,7 @@ return {
         },
         enabled = true
     },
-    ["workshop-375850593"] = {
+    ["workshop-2798599672"] = {
         configuration_options = {},
         enabled = true
     },

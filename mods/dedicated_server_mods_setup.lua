@@ -14,7 +14,7 @@ ServerModSetup("1852257480") -- Beefalo Widget
 ServerModSetup("569043634") -- Campfire Respawn
 ServerModSetup("347079953") -- Display Food Values
 ServerModSetup("1185229307") -- Epic Healthbar
-ServerModSetup("375850593") -- Extra Equip Slots
+ServerModSetup("2798599672") -- Extra Equip Slots
 ServerModSetup("378160973") -- Global Positions
 ServerModSetup("374550642") -- Increased Stack size
 ServerModSetup("501385076") -- Quick Pick
