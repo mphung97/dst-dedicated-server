@@ -1,4 +1,8 @@
 return {
+    ["workshop-569043634"] = {
+        configuration_options = {},
+        enabled = true
+    },
     ["workshop-1111658995"] = {
         configuration_options = {},
         enabled = true
