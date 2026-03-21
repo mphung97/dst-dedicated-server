@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  dst-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dst-server
+    ports:
+      - "10889:10889/udp"  # Cluster communication
+      - "10888:10888/udp"  # Shard communication
+      - "11000:11000/udp"  # Master world connections
+    restart: unless-stopped
+    environment:
+      - CLUSTER_NAME=Cluster_1
