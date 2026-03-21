@@ -12,12 +12,12 @@
 
 ServerModSetup("1852257480") -- Beefalo Widget
 ServerModSetup("569043634") -- Campfire Respawn
-ServerModSetup("347079953") -- Display Food Values
+-- ServerModSetup("347079953") -- Display Food Values
 ServerModSetup("1185229307") -- Epic Healthbar
-ServerModSetup("2798599672") -- Extra Equip Slots
+ServerModSetup("2798599672") -- Extra Equip Slots+3
 ServerModSetup("378160973") -- Global Positions
 ServerModSetup("374550642") -- Increased Stack size
-ServerModSetup("501385076") -- Quick Pick
+ServerModSetup("2921270365") -- Quick Pick
 ServerModSetup("1111658995") -- Show Bundle
-ServerModSetup("362175979") -- Wormhole Marks [DST]
-ServerModSetup("2078243581") -- Display Attack Range
+ServerModSetup("3571706033") -- Wormhole Marks [DST]
+-- ServerModSetup("2078243581") -- Display Attack Range

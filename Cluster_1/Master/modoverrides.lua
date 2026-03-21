@@ -51,10 +51,8 @@ return {
         },
         enabled = true
     },
-    ["workshop-362175979"] = {
-        configuration_options = {
-            ["Draw over FoW"] = "disabled"
-        },
+    ["workshop-3571706033"] = {
+        configuration_options = {},
         enabled = true
     },
     ["workshop-374550642"] = {
@@ -72,7 +70,7 @@ return {
         configuration_options = {},
         enabled = true
     },
-    ["workshop-501385076"] = {
+    ["workshop-2921270365"] = {
         configuration_options = {
             quick_cook_on_fire = true,
             quick_harvest = true,
