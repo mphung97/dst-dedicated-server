@@ -1,5 +1,3 @@
----
-
 # 🌙 DON'T STARVE TOGETHER MULTI-SHARD DEDICATED SERVER 🌙
 
 **Survive Together in the Darkness**
