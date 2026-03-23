@@ -1,18 +1,10 @@
-```
-╔═══════════════════════════════════════════════════════════════════════════╗
-║                                                                           ║
-║     ██████╗ ███████╗████████╗    ███████╗███████╗██████╗ ██╗   ██╗    ║
-║     ██╔══██╗██╔════╝╚══██╔══╝    ██╔════╝██╔════╝██╔══██╗██║   ██║    ║
-║     ██║  ██║███████╗   ██║       ███████╗█████╗  ██████╔╝██║   ██║    ║
-║     ██║  ██║╚════██║   ██║       ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝    ║
-║     ██████╔╝███████║   ██║       ███████║███████╗██║  ██║ ╚████╔╝     ║
-║     ╚═════╝ ╚══════╝   ╚═╝       ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝      ║
-║                                                                           ║
-║        DON'T STARVE TOGETHER MULTI-SHARD DEDICATED SERVER SETUP          ║
-║                   🌙 Survive Together in the Darkness 🌙                 ║
-║                                                                           ║
-╚═══════════════════════════════════════════════════════════════════════════╝
-```
+---
+
+# 🌙 DON'T STARVE TOGETHER MULTI-SHARD DEDICATED SERVER 🌙
+
+**Survive Together in the Darkness**
+
+---
 
 > **A containerized Don't Starve Together (DST) dedicated server setup with multi-shard support (Master and Caves), Docker deployment, and mod compatibility.**
 
@@ -258,8 +250,8 @@ This project is a community-created dedicated server configuration for **Don't S
 
 **Don't Starve Together** is developed by **Klei Entertainment**.
 
-```
-╔═══════════════════════════════════════════════════════════════════════════╗
-║                  Happy Surviving! Don't Starve Together! 🌙                ║
-╚═══════════════════════════════════════════════════════════════════════════╝
-```
+---
+
+### 🌙 Happy Surviving! Don't Starve Together! 🌙
+
+---
