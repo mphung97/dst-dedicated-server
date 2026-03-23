@@ -1,255 +1,129 @@
-# 🌙 DON'T STARVE TOGETHER MULTI-SHARD DEDICATED SERVER 🌙
+<div align="center">
 
-**Survive Together in the Darkness**
+# 🌑 Don't Starve Together: Dedicated Server 🌑
 
----
+### *Multi-Shard • Dockerized • Mod-Ready*
 
-> **A containerized Don't Starve Together (DST) dedicated server setup with multi-shard support (Master and Caves), Docker deployment, and mod compatibility.**
+[![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![SteamCMD](https://img.shields.io/badge/SteamCMD-Included-171a21?style=for-the-badge&logo=steam&logoColor=white)](https://developer.valvesoftware.com/wiki/SteamCMD)
+[![Lua](https://img.shields.io/badge/Lua-Configurable-000080?style=for-the-badge&logo=lua&logoColor=white)](https://www.lua.org/)
 
----
+*Forge your own world in the constant darkness. Control Master and Cave shards seamlessly.*
 
-## ⚔️ Features
+[✨ Features](#-features) • [🚀 Quick Start](#-quick-start) • [⚙️ Configuration](#-configuration) • [🔮 Mods](#-modding-system)
 
-- 🌍 **Master & Caves Worlds** - Control dual-shard reality with multi-world support
-- 🐳 **Docker Containerized** - Deploy anywhere with zero configuration headaches  
-- 🔧 **Mod Management System** - Customize your world with powerful modding support
-- ⚙️ **Deep Customization** - Tune every aspect: modes, players, PvP, gameplay mechanics
-- 🛡️ **Server Security** - Admin lists, whitelists, and blocklists for complete access control
+</div>
 
 ---
 
-## 📜 Project Structure
+## ✨ Features
 
-```
+| Feature | Description |
+| :--- | :--- |
+| **🌍 Dual Worlds** | Seamless **Master** & **Caves** shard support. |
+| **🐳 Docker First** | Zero-headache deployment with `docker-compose`. |
+| **🛡️ Security** | Integrated **Admin**, **Whitelist**, and **Blocklist** controls. |
+| **🔧 Mod Support** | Easy-to-use mod injection system for custom gameplay. |
+| **⚡ Performance** | Optimized configuration for stable, low-latency play. |
+
+---
+
+## 📂 Architecture
+
+```bash
 dst-dedicated-server/
-├── docker-compose.yml             # Docker Compose configuration
-├── Dockerfile                    # Docker container definition
-├── run_dedicated_servers.sh       # Main server startup script
-├── .gitignore                     # Git ignore rules
-├── Cluster_1/                     # Main server cluster
-│   ├── cluster_token.txt          # Cluster authentication token (required)
-│   ├── cluster_token.example.txt  # Example cluster token
-│   ├── cluster.ini                # Cluster-wide configuration
-│   ├── adminlist.txt              # Server administrators list
-│   ├── whitelist.txt              # Player whitelist (optional)
-│   ├── blocklist.txt              # Player blocklist
-│   ├── Master/                    # Master world shard
-│   │   ├── server.ini             # Master shard configuration
-│   │   ├── modoverrides.lua       # Mod overrides for Master
-│   │   └── worldgenoverride.lua   # World generation settings for Master
-│   └── Caves/                     # Caves world shard
-│       ├── server.ini             # Caves shard configuration
-│       ├── modoverrides.lua       # Mod overrides for Caves
-│       └── worldgenoverride.lua   # World generation settings for Caves
-└── mods/                          # Server-side mods directory
-    ├── dedicated_server_mods_setup.lua  # Mod setup configuration
-    ├── modsettings.lua            # Global mod settings
-    ├── INSTALLING_MODS.txt        # Mod installation guide
-    └── MAKING_MODS.txt            # Mod creation guide
+├── 🐳 docker-compose.yml       # Orchestration logic
+├── 🏗️ Dockerfile               # Container definition
+├── 📜 run_dedicated_servers.sh # Boot script
+├── 📂 Cluster_1/               # Main Game Data
+│   ├── 🔑 cluster_token.txt    # Auth Token (Required)
+│   ├── ⚙️ cluster.ini          # Core Settings
+│   ├── 📜 adminlist.txt        # Admin UUIDs
+│   ├── 🏰 Master/              # Overworld Shard
+│   └── 🦇 Caves/               # Underworld Shard
+└── 📦 mods/                    # Mod Configuration
+    ├── ⚙️ dedicated_server_mods_setup.lua
+    └── 📜 modsettings.lua
 ```
 
-## Prerequisites
-
-- 🐳 **Docker** - Container runtime environment
-- 🔐 **Klei Account & Application Key** - Required for server authentication  
-- 📦 **SteamCMD** - Automatically included in Docker image
-
 ---
 
-## ⚙️ Configuration Guide
+## 🚀 Quick Start
 
-### 🎮 Cluster Configuration (`Cluster_1/cluster.ini`)
+### 1. 🔑 Get Your Token
+Generate a cluster token from the [Klei Account Page](https://accounts.klei.com/account/game/serversettings?game=dontstarvetogether).
+Paste it into:
+`Cluster_1/cluster_token.txt`
 
-**Gameplay Settings:**
-- `game_mode` - Server mode (survival, wilderness, etc.)
-- `max_players` - Maximum concurrent players (default: 6)
-- `pvp` - Enable/disable combat between players (default: false)
-- `pause_when_empty` - Pause game when players are offline (default: true)
-
-**Network Settings:**
-- `cluster_name` - Your server's display name
-- `cluster_description` - Server description (shown in server browser)
-- `cluster_password` - Optional password protection
-
-**Multi-Shard Settings:**
-- `shard_enabled` - Enable multi-shard support (default: true)
-- `bind_ip` - Local IP for shard communication
-- `master_ip` - Master shard IP address
-- `master_port` - Master shard port
-- `cluster_key` - Shared key for inter-shard communication
-
-### 🌍 Per-Shard Configuration
-
-**Master Shard** (`Cluster_1/Master/server.ini`)
-- `is_master` - Marks this as the master shard
-- `server_port` - Port for Master world connections
-
-**Caves Shard** (`Cluster_1/Caves/server.ini`)
-- Independent shard configuration
-
----
-
-## 🚀 Setup Wizard
-
-### Step 1: Retrieve Your Cluster Token 🔐
-
-1. Log in to your **Steam** account
-2. Navigate to the [Don't Starve Together Game Servers](https://accounts.klei.com/account/game/serversettings?game=dontstarvetogether) page
-3. Generate a new **Cluster Authentication Token**
-4. Paste the token into `Cluster_1/cluster_token.txt`
-
-### Step 2: Customize Server Settings ⚙️
-
-Edit `Cluster_1/cluster.ini` and configure:
-- Server name & description  
-- Gameplay mode and difficulty
-- Player limits and PvP settings
-- Other game mechanics
-
-### Step 3: Add Mods (Optional) 📦
-
-Place mod files in the `mods/` directory and configure in the mod override files.
-
----
-
-## 🎯 Deployment Options
-
-### 🐳 Docker Compose (Recommended)
-
+### 2. ⚡ Launch
+Spin up the server fortress:
 ```bash
-# ⚡ Launch your server
 docker-compose up -d
+```
+*The server will initialize, download SteamCMD files, and update the game.*
 
-# 👀 Watch the action unfold
+### 3. 👀 Monitor
+Watch the console for the "Server Started" message:
+```bash
 docker-compose logs -f
-
-# 🛑 Shut down your realm
-docker-compose down
-```
-
-The `docker-compose.yml` automatically handles image building, port exposure, and volume mounting.
-
-### 🐳 Manual Docker Deployment
-
-```bash
-# Build your server container
-docker build -t dst-dedicated-server .
-
-# Launch the server fortress
-docker run -d \
-  --name dst-server \
-  -p 10889:10889/udp \
-  -p 10888:10888/udp \
-  -p 11000:11000/udp \
-  dst-dedicated-server
-```
-
-### ⚡ Direct Execution
-
-```bash
-# Run the server script directly (SteamCMD must be installed)
-./run_dedicated_servers.sh
 ```
 
 ---
 
-## 🌐 Network Ports
+## ⚙️ Configuration
 
-All ports use **UDP protocol**:
+### 🎮 Gameplay Settings
+Edit `Cluster_1/cluster.ini` to tune your experience.
 
-| Port | Purpose |
-|------|---------|
-| **10889** | Cluster communication (Master shard) |
-| **10888** | Inter-shard communication |
-| **11000** | Master world connections |
+```ini
+[GAMEPLAY]
+game_mode = survival   ; survival, wilderness, or endless
+max_players = 6        ; Scale for your group size
+pvp = false            ; Friendly fire?
+pause_when_empty = true ; Save resources when idle
+```
 
----
+### 🕸️ Network Ports (UDP)
 
-## 👥 Player Access Control
-
-### 🤝 Admin List (`Cluster_1/adminlist.txt`)
-
-Grant admin privileges to trusted players. Add one player per line:
-- Player names
-- Klei user IDs
-
-Admins can kick players, change settings, and manage the server.
-
-### ✅ Whitelist (`Cluster_1/whitelist.txt`)
-
-Enable whitelist mode to restrict access. Only listed players can join:
-- Player names
-- Klei user IDs
-
-### ❌ Blocklist (`Cluster_1/blocklist.txt`)
-
-Permanently ban troublemakers. Blocked players cannot join:
-
-- Player names
-- Klei user IDs
+| Port | Service | Description |
+| :--- | :--- | :--- |
+| `10889` | **Master** | Main connection point |
+| `10888` | **Inter-Shard** | Caves <-> Master link |
+| `11000` | **Steam** | Authentication |
 
 ---
 
 ## 🔮 Modding System
 
-Enhance your realm with powerful mods:
+Customize your world by editing the files in `mods/`.
 
-1. **Add Mods** - Download and place mod files in `mods/` directory
-2. **Configure Globally** - Edit `mods/modsettings.lua` and `mods/dedicated_server_mods_setup.lua`
-3. **Per-World Tweaks** - Customize individual worlds using:
-   - `Master/modoverrides.lua` - Master world mod settings
-   - `Caves/modoverrides.lua` - Caves world mod settings
-
-📚 **Learn More:** See `mods/INSTALLING_MODS.txt` and `mods/MAKING_MODS.txt` for detailed guides.
+1.  **Define Mods:** Add IDs to `dedicated_server_mods_setup.lua`.
+    ```lua
+    ServerModSetup("345692228") -- Minimap HUD
+    ```
+2.  **Enable Mods:** Configure settings in `Master/modoverrides.lua` and `Caves/modoverrides.lua`.
 
 ---
 
-## ⚠️ Troubleshooting Guide
+## 🛠️ Troubleshooting
 
-### 🔴 Server Won't Start
+<details>
+<summary><strong>⚠️ Server Won't Start</strong></summary>
 
-- Check that all files in `Cluster_1/` are present and properly formatted
-- Verify `cluster_token.txt` contains a valid token
-- Check Docker/SteamCMD logs for error messages
+*   Ensure `cluster_token.txt` exists and is valid.
+*   Check write permissions on the `Cluster_1` folder.
+</details>
 
-### 🔴 Token Not Found
+<details>
+<summary><strong>⚠️ "Cluster Token Not Found"</strong></summary>
 
-```
-Missing cluster_token.txt: Generate a token from your Klei account and 
-place it directly in Cluster_1/cluster_token.txt
-```
+*   The file must be named exactly `cluster_token.txt` (not `.txt.txt`).
+*   It must reside in the root of `Cluster_1/`.
+</details>
 
-### 🔴 Connection Problems
+<details>
+<summary><strong>⚠️ Mods Not Downloading</strong></summary>
 
-- Verify firewall allows **UDP traffic** on ports 10889, 10888, 11000
-- Check that your router allows UPnP or manually port-forward
-- Confirm shard IP addresses in `cluster.ini` match your network setup
-
-### 🔴 Mods Not Loading
-
-- Verify mod files are in `mods/` directory (must be `.lua` format)
-- Check `modsettings.lua` contains correct mod names
-- Review `modoverrides.lua` files for syntax errors
-- Check Docker logs for lua compilation errors
-
----
-
-## 🔗 Resources & Community
-
-- 📖 **[Modding Knowledge](http://forums.kleientertainment.com/downloads.php)** - Klei Forum Downloads
-- 📚 **[Game Wiki](https://dontstarve.fandom.com/)** - Don't Starve Together Wiki
-- 🎮 **[Official Wiki](https://dontstarve.fandom.com/wiki/Don%27t_Starve_Together)** - Complete Gameplay Guide
-
----
-
-## 📜 License & Credits
-
-This project is a community-created dedicated server configuration for **Don't Starve Together**.
-
-**Don't Starve Together** is developed by **Klei Entertainment**.
-
----
-
-### 🌙 Happy Surviving! Don't Starve Together! 🌙
-
----
+*   Check internet connectivity within the container.
+*   Verify Workshop IDs on Steam.
+</details>
