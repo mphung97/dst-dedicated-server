@@ -14,4 +14,5 @@ services:
     environment:
       - CLUSTER_NAME=Cluster_1
     volumes:
+      - ./Cluster_1:/home/steam/.klei/DoNotStarveTogether/Cluster_1
       - ./mods/dedicated_server_mods_setup.lua:/home/steam/dontstarvetogether_dedicated_server/mods/dedicated_server_mods_setup.lua

@@ -14,10 +14,6 @@ This document outlines the planned enhancements and future development direction
 * [ ] Enable cluster selection via environment variables
 * [ ] Create isolated data directories per cluster
 
-### 🔹 Automated Backup System
-
-* [ ] Backup world data to external storage
-
 ---
 
 ## 🧭 Planned
@@ -45,6 +41,7 @@ This document outlines the planned enhancements and future development direction
 * [x] Mod support system
 * [x] Admin / Whitelist / Blocklist configuration
 * [x] Docker Compose orchestration
+* [x] Backup world data to external storage
 
 ---
 

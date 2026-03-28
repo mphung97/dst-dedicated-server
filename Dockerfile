@@ -23,7 +23,6 @@ RUN "$STEAM_HOME/steamcmd.sh" \
     +app_update 343050 validate \
     +quit
 
-COPY --chown=steam:steam Cluster_1 "$DONTSTARVE_DIR/Cluster_1"
 COPY --chown=steam:steam run_dedicated_servers.sh /home/steam/run_dedicated_servers.sh
 
 RUN chmod +x /home/steam/run_dedicated_servers.sh

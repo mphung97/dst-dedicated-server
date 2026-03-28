@@ -70,6 +70,40 @@ docker-compose logs -f
 
 ---
 
+## 💾 Data Persistence & Backups
+
+Game data (world saves, player data, mods) is stored in the `Cluster_1` folder on the host machine and mounted into the container. This ensures data survives container rebuilds and removals.
+
+### First-Time Setup
+
+1. Ensure `Cluster_1/cluster_token.txt` contains your Klei server token
+2. Run `docker-compose up -d` to start the server
+3. The server will create required subdirectories (Master/, Caves/) on first run
+
+### Backing Up Data
+
+To backup your server data:
+```bash
+# Stop the container first
+docker-compose down
+
+# Backup the Cluster_1 folder
+cp -r Cluster_1 Cluster_1.backup.$(date +%Y%m%d)
+
+# Restart the server
+docker-compose up -d
+```
+
+To restore from a backup:
+```bash
+docker-compose down
+rm -rf Cluster_1
+cp -r Cluster_1.backup.20240101 Cluster_1
+docker-compose up -d
+```
+
+---
+
 ## ⚙️ Configuration
 
 ### 🎮 Gameplay Settings
