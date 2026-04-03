@@ -1,6 +1,11 @@
-version: '3.8'
-
 services:
+  dst-base:
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+    image: dst-dedicated:local
+    profiles: ["build"]
+
   dst-server:
     build:
       context: .
@@ -15,3 +20,8 @@ services:
       - CLUSTER_NAME=Cluster_1
     volumes:
       - ./mods/dedicated_server_mods_setup.lua:/home/steam/dontstarvetogether_dedicated_server/mods/dedicated_server_mods_setup.lua
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

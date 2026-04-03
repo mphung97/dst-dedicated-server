@@ -60,19 +60,19 @@ Paste it into:
 
 First, build the base server image (only needed once or when the DST server updates):
 ```bash
-docker build -t dst-dedicated:local -f Dockerfile.base .
+docker compose --profile build build dst-base
 ```
 
 Then spin up the server fortress:
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 *The server will initialize and start the Master and Caves shards.*
 
 ### 3. 👀 Monitor
 Watch the console for the "Server Started" message:
 ```bash
-docker-compose logs -f
+docker compose logs -f
 ```
 
 ---
