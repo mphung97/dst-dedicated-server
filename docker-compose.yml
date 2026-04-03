@@ -4,7 +4,7 @@ services:
   dst-server:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.cluster
     container_name: dst-server
     ports:
       - "10889:10889/udp"  # Cluster communication

@@ -1,0 +1,17 @@
+FROM dst-dedicated:local
+
+# Set environment variables (inherited from base, re-declared for clarity)
+ENV DONTSTARVE_DIR=/home/steam/.klei/DoNotStarveTogether
+
+# Copy cluster configuration
+COPY --chown=steam:steam Cluster_1 "$DONTSTARVE_DIR/Cluster_1"
+
+# Copy and configure launch script
+COPY --chown=steam:steam run_dedicated_servers.sh /home/steam/run_dedicated_servers.sh
+
+RUN chmod +x /home/steam/run_dedicated_servers.sh
+
+EXPOSE 10889/udp 10888/udp
+
+ENTRYPOINT ["/home/steam/run_dedicated_servers.sh"]
+CMD []

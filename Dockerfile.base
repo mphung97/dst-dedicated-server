@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends libcurl4-gnutls
 
 USER steam
 
+# Download and install DST dedicated server
 RUN "$STEAM_HOME/steamcmd.sh" \
     +@ShutdownOnFailedCommand 1 \
     +@NoPromptForPassword 1 \
@@ -22,13 +23,3 @@ RUN "$STEAM_HOME/steamcmd.sh" \
     +login anonymous \
     +app_update 343050 validate \
     +quit
-
-COPY --chown=steam:steam Cluster_1 "$DONTSTARVE_DIR/Cluster_1"
-COPY --chown=steam:steam run_dedicated_servers.sh /home/steam/run_dedicated_servers.sh
-
-RUN chmod +x /home/steam/run_dedicated_servers.sh
-
-EXPOSE 10889/udp 10888/udp
-
-ENTRYPOINT ["/home/steam/run_dedicated_servers.sh"]
-CMD []

@@ -33,7 +33,8 @@
 ```bash
 dst-dedicated-server/
 ├── 🐳 docker-compose.yml       # Orchestration logic
-├── 🏗️ Dockerfile               # Container definition
+├── 🏗️ Dockerfile.base          # DST server binaries (SteamCMD)
+├── 🏗️ Dockerfile.cluster       # Cluster config + launcher
 ├── 📜 run_dedicated_servers.sh # Boot script
 ├── 📂 Cluster_1/               # Main Game Data
 │   ├── 🔑 cluster_token.txt    # Auth Token (Required)
@@ -55,12 +56,18 @@ Generate a cluster token from the [Klei Account Page](https://accounts.klei.com/
 Paste it into:
 `Cluster_1/cluster_token.txt`
 
-### 2. ⚡ Launch
-Spin up the server fortress:
+### 2. ⚡ Build & Launch
+
+First, build the base server image (only needed once or when the DST server updates):
+```bash
+docker build -t dst-dedicated:local -f Dockerfile.base .
+```
+
+Then spin up the server fortress:
 ```bash
 docker-compose up -d
 ```
-*The server will initialize, download SteamCMD files, and update the game.*
+*The server will initialize and start the Master and Caves shards.*
 
 ### 3. 👀 Monitor
 Watch the console for the "Server Started" message:
