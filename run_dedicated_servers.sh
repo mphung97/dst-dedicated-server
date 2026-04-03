@@ -1,9 +1,8 @@
 #!/bin/bash
 
-steamcmd_dir="$HOME/steamcmd"
-install_dir="$HOME/dontstarvetogether_dedicated_server"
+install_dir="/home/steam/dontstarvetogether_dedicated_server"
 cluster_name="Cluster_1"
-dontstarve_dir="$HOME/.klei/DoNotStarveTogether"
+dontstarve_dir="/home/steam/.klei/DoNotStarveTogether"
 
 function fail()
 {
@@ -18,16 +17,10 @@ function check_for_file()
 	fi
 }
 
-cd "$steamcmd_dir" || fail "Missing $steamcmd_dir directory!"
-
-check_for_file "steamcmd.sh"
 check_for_file "$dontstarve_dir/$cluster_name/cluster.ini"
 check_for_file "$dontstarve_dir/$cluster_name/cluster_token.txt"
 check_for_file "$dontstarve_dir/$cluster_name/Master/server.ini"
 check_for_file "$dontstarve_dir/$cluster_name/Caves/server.ini"
-
-./steamcmd.sh +force_install_dir "$install_dir" +login anonymous +app_update 343050 validate +quit
-
 check_for_file "$install_dir/bin64"
 
 cd "$install_dir/bin64" || fail
